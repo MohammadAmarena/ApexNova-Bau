@@ -58,35 +58,35 @@ const Footer = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
-    emailjs
-    .send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID, 
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      {
-        from_name: formData.name,
-        from_email: formData.email,
-        message: formData.message,
-      },
-      import.meta.env.VITE_EMAILJS_USER_ID 
-    )
-    .then(
-      (response) => {
-        Swal.fire({
-          icon: "success",
-          title: "Message Sent",
-          text: "Your message has been sent successfully!",
-        });
-        setFormData({ name: "", email: "", message: "" });
-      },
-      (error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Failed to Send",
-          text: "There was an error sending your message. Please try again.",
-        });
-      }
-    );
-  
+emailjs
+  .send(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+    },
+    import.meta.env.VITE_EMAILJS_USER_ID 
+  )
+  .then(
+    (response) => {
+      Swal.fire({
+        icon: "success",
+        title: "Message Sent",
+        text: "Your message has been sent successfully!",
+      });
+      setFormData({ name: "", email: "", message: "" });
+    },
+    (error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Send",
+        text: "There was an error sending your message. Please try again.",
+      });
+    }
+  );
+
   
   };
 
