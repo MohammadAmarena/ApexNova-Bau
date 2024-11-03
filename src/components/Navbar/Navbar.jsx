@@ -53,19 +53,22 @@ const Navbar = () => {
               ))}
             </ul>
 
-            {/* Contact Button */}
-            <button
-              onClick={handleMailClick}
-              aria-label="Mail Me"
-              className="bg-primary/70 hover:scale-105 duration-200 text-white px-4 py-2 rounded-full flex items-center gap-3"
-            >
-              Mail Me
-              <FaEnvelope className="text-xl text-white drop-shadow-sm cursor-pointer" />
-            </button>
+            {/* Contact Section */}
+            <div className="flex flex-col sm:flex-row items-center sm:gap-4 gap-1">
+              {/* Email Button */}
+              <button
+                onClick={handleMailClick}
+                aria-label="Mail Me"
+                className="bg-primary/70 hover:scale-105 duration-200 text-white px-4 py-2 rounded-full flex items-center gap-3"
+              >
+                Mail Me
+                <FaEnvelope className="text-xl text-white drop-shadow-sm cursor-pointer" />
+              </button>
 
-            {/* Phone Number */}
-            <div className="flex items-center gap-1">
-              <span className="text-lg">004917664329242</span>
+              {/* Phone Number */}
+              <div className="flex items-center sm:gap-1 gap-0 text-center">
+                <span className="text-lg">004917664329242</span>
+              </div>
             </div>
           </div>
         </div>
