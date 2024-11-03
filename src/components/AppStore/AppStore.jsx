@@ -3,7 +3,7 @@ import { HiMail } from "react-icons/hi"; // Icon für die E-Mail
 import { FaArrowDown } from "react-icons/fa"; // Icon für den Scroll-Button
 
 const backgroundStyle = {
-  backgroundImage: `url(https://picsum.photos/101/109)`,
+  backgroundImage: `url(https://picsum.photos/100/100)`,
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
   backgroundSize: "cover",

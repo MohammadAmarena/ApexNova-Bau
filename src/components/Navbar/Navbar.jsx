@@ -27,7 +27,7 @@ const Navbar = () => {
               <FontAwesomeIcon
                 icon={faMeteor}
                 className="text-3xl"
-                style={{ color: "green" }}
+                style={{ color: "orange" }}
               />
               ApexNova-Bau
             </a>

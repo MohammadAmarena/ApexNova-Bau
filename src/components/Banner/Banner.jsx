@@ -2,7 +2,7 @@ import React from "react";
 import { FaHardHat, FaTruck, FaTools } from "react-icons/fa";
 
 const bgImage = {
-  backgroundImage: `url(https://picsum.photos/103/103)`,
+  backgroundImage: `url(https://picsum.photos/100/103)`,
   backgroundColor: "#270c03",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
@@ -22,7 +22,7 @@ const Banner = () => {
               {/* Image section */}
               <div data-aos="zoom-in">
                 <img
-                  src='https://picsum.photos/103/103'
+                  src='https://picsum.photos/100/101'
                   alt="construction img"
                   className="max-w-[430px] w-full mx-auto drop-shadow-[10px_-10px_12px_rgba(0,0,0,1)] spin rounded-full"
                 />
