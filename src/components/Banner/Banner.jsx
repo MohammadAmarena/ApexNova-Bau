@@ -31,13 +31,13 @@ const Banner = () => {
               <div className="flex flex-col justify-center gap-6 sm:pt-0">
                 <h1
                   data-aos="fade-up"
-                  className="text-3xl sm:text-4xl font-bold font-cursive"
+                  className="text-3xl sm:text-4xl font-bold font-cursive text-orange-600"
                 >
                   Zuverlässiger Baustellenservice
                 </h1>
                 <p
                   data-aos="fade-up"
-                  className="text-sm text-gray-500 tracking-wide leading-5"
+                  className="text-sm text-gray-300 tracking-wide leading-5"
                 >
                   Ihr verlässlicher Partner für sichere und effiziente
                   Baustellenabwicklung, angepasst an alle Anforderungen und
@@ -47,31 +47,31 @@ const Banner = () => {
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-5">
                     <div data-aos="fade-up" className="flex items-center gap-3">
-                      <FaHardHat className="text-2xl h-12 w-12 shadow-sm p-3 rounded-full bg-yellow-100" />
-                      <span>Sicherheitsplanung</span>
+                      <FaHardHat className="text-2xl h-12 w-12 shadow-sm p-3 rounded-full bg-orange-200" />
+                      <span className="text-gray-300">Sicherheitsplanung</span>
                     </div>
                     <div
                       data-aos="fade-up"
                       data-aos-delay="300"
                       className="flex items-center gap-3"
                     >
-                      <FaTruck className="text-2xl h-12 w-12 shadow-sm p-3 rounded-full bg-blue-100" />
-                      <span>Materiallieferung</span>
+                      <FaTruck className="text-2xl h-12 w-12 shadow-sm p-3 rounded-full bg-blue-200" />
+                      <span className="text-gray-300">Materiallieferung</span>
                     </div>
                     <div
                       data-aos="fade-up"
                       data-aos-delay="500"
                       className="flex items-center gap-3"
                     >
-                      <FaTools className="text-4xl h-12 w-12 shadow-sm p-3 rounded-full bg-green-100" />
-                      <span>Fachgerechte Wartung</span>
+                      <FaTools className="text-4xl h-12 w-12 shadow-sm p-3 rounded-full bg-orange-200" />
+                      <span className="text-gray-300">Fachgerechte Wartung</span>
                     </div>
                   </div>
                   <div
                     data-aos="slide-left"
-                    className="border-l-4 border-primary/50 pl-6 space-y-2"
+                    className="border-l-4 border-blue-400 pl-6 space-y-2"
                   >
-                    <h1 className="text-2xl font-semibold font-cursive">
+                    <h1 className="text-2xl font-semibold font-cursive text-orange-600">
                       Qualität und Präzision
                     </h1>
                     <p className="text-sm text-gray-500">

@@ -44,14 +44,14 @@ const ToolInfo = () => {
               <div className="flex flex-wrap justify-center sm:justify-start items-center gap-4">
                 <button 
                   onClick={handleEmailClick} 
-                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition"
+                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-600 transition"
                 >
                   <HiMail className="text-xl" />
                   E-Mail senden
                 </button>
                 <button 
                   onClick={scrollToBottom} 
-                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition"
+                  className="flex items-center gap-2 px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition"
                 >
                   <FaArrowDown className="text-xl" />
                   Zum Kontaktformular

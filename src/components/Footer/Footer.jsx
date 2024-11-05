@@ -32,9 +32,8 @@ const Footer = () => {
     }));
 
     if (name === "email") {
-      // Check if email format is correct
       if (!emailRegex.test(value)) {
-        setEmailError("Please enter a valid email address.");
+        setEmailError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
       } else {
         setEmailError("");
       }
@@ -43,13 +42,13 @@ const Footer = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = "Please fill in your name.";
+    if (!formData.name) newErrors.name = "Bitte geben Sie Ihren Namen ein.";
     if (!formData.email) {
-      newErrors.email = "Please enter your email.";
+      newErrors.email = "Bitte geben Sie Ihre E-Mail ein.";
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address.";
+      newErrors.email = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
     }
-    if (!formData.message) newErrors.message = "Please enter a message.";
+    if (!formData.message) newErrors.message = "Bitte geben Sie eine Nachricht ein.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -58,36 +57,34 @@ const Footer = () => {
     e.preventDefault();
     if (!validateForm()) return;
 
-emailjs
-  .send(
-    import.meta.env.VITE_EMAILJS_SERVICE_ID, 
-    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    {
-      from_name: formData.name,
-      from_email: formData.email,
-      message: formData.message,
-    },
-    import.meta.env.VITE_EMAILJS_USER_ID 
-  )
-  .then(
-    (response) => {
-      Swal.fire({
-        icon: "success",
-        title: "Message Sent",
-        text: "Your message has been sent successfully!",
-      });
-      setFormData({ name: "", email: "", message: "" });
-    },
-    (error) => {
-      Swal.fire({
-        icon: "error",
-        title: "Failed to Send",
-        text: "There was an error sending your message. Please try again.",
-      });
-    }
-  );
-
-  
+    emailjs
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_USER_ID 
+      )
+      .then(
+        (response) => {
+          Swal.fire({
+            icon: "success",
+            title: "Nachricht gesendet",
+            text: "Ihre Nachricht wurde erfolgreich gesendet!",
+          });
+          setFormData({ name: "", email: "", message: "" });
+        },
+        (error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Senden fehlgeschlagen",
+            text: "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+          });
+        }
+      );
   };
 
   const scrollToTop = () => {
@@ -129,7 +126,7 @@ emailjs
                   onChange={handleChange}
                   className={`w-full p-2 rounded-md bg-white text-black transition duration-300 border-2 ${
                     errors.name ? "border-red-500 animate-shake" : "border-transparent"
-                  } focus:outline-none focus:border-blue-500`}
+                  } focus:outline-none focus:border-orange-500`}
                 />
                 {errors.name && <p className="text-red-500 text-sm animate-fadeIn">{errors.name}</p>}
               </div>
@@ -142,9 +139,8 @@ emailjs
                   onChange={handleChange}
                   className={`w-full p-2 rounded-md bg-white text-black transition duration-300 border-2 ${
                     errors.email || emailError ? "border-red-500 animate-shake" : "border-transparent"
-                  } focus:outline-none focus:border-blue-500`}
+                  } focus:outline-none focus:border-orange-500`}
                 />
-                {/* Show email error immediately as the user types */}
                 {emailError && <p className="text-red-500 text-sm animate-fadeIn">{emailError}</p>}
               </div>
               <div>
@@ -155,7 +151,7 @@ emailjs
                   onChange={handleChange}
                   className={`w-full p-2 rounded-md bg-white text-black transition duration-300 border-2 ${
                     errors.message ? "border-red-500 animate-shake" : "border-transparent"
-                  } focus:outline-none focus:border-blue-500`}
+                  } focus:outline-none focus:border-orange-500`}
                   rows="4"
                 />
                 {errors.message && <p className="text-red-500 text-sm animate-fadeIn">{errors.message}</p>}

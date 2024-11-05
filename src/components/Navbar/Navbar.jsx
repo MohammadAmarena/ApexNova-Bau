@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-secondary to-secondary/90 shadow-md text-white">
+    <div className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-orange-500 to-blue-600 shadow-md text-white">
       <div className="container py-2 px-4">
         <div className="flex justify-between items-center">
           {/* Icon Section */}
@@ -29,7 +29,7 @@ const Navbar = () => {
                 className="text-3xl"
                 style={{ color: "orange" }}
               />
-              ApexNova-Bau
+              ابو بشير للسياحة والسفر
             </a>
           </div>
 
@@ -59,7 +59,7 @@ const Navbar = () => {
               <button
                 onClick={handleMailClick}
                 aria-label="Mail Me"
-                className="bg-primary/70 hover:scale-105 duration-200 text-white px-4 py-2 rounded-full flex items-center gap-3"
+                className="bg-orange-400 hover:bg-blue-600 duration-200 text-white px-4 py-2 rounded-full flex items-center gap-3"
               >
                 Mail Me
                 <FaEnvelope className="text-xl text-white drop-shadow-sm cursor-pointer" />

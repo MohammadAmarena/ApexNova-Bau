@@ -1,0 +1,167 @@
+.building-row {
+    display: flex;
+    align-items: center; /* Center letters vertically */
+    margin: 0.2rem 0; /* Add vertical spacing */
+}
+
+.letter {
+    font-size: 3rem; /* Adjust size as needed */
+    color: white; /* Ensure visibility against the background */
+}
+
+/* Divider styles */
+.divider {
+    width: 2px; /* Width of the vertical divider */
+    height: 50px; /* Height of the vertical divider */
+    background: white; /* Color of the divider */
+    margin: 0 0.5rem; /* Spacing around the divider */
+}
+
+/* Roof styles to create a slanted effect */
+.roof {
+    width: 0; 
+    height: 0; 
+    border-left: 50px solid transparent; /* Left slant */
+    border-right: 50px solid transparent; /* Right slant */
+    border-bottom: 30px solid white; /* Triangle color */
+    position: relative;
+    margin: 0 auto; /* Center the roof */
+}
+
+/* Container styling */
+.building-container {
+    position: relative;
+    padding: 1rem;
+}
+
+.building-text {
+    display: flex;
+    flex-direction: column; /* Stack the rows vertically */
+    align-items: center; /* Center the building text */
+    max-width: 180px;
+    margin: 0 auto;
+    gap: 0.4rem;
+}
+
+/* Line effects around the building text */
+.building-container::before,
+.building-container::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: white;
+}
+
+.building-container::before {
+    top: 20%;
+    left: 0;
+}
+
+.building-container::after {
+    bottom: 20%;
+    right: 0;
+}
+
+.slogan {
+    font-size: 1rem;
+    opacity: 0;
+    animation: fadeInSlogan 2s forwards;
+    animation-delay: 2s;
+    margin-top: 1rem;
+    color: lightgray;
+}
+
+/* Keyframes for animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInSlogan {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Sequential animation delays */
+.letter-0 { animation-delay: 0.1s; }
+.letter-1 { animation-delay: 0.2s; }
+.letter-2 { animation-delay: 0.3s; }
+.letter-3 { animation-delay: 0.4s; }
+.letter-4 { animation-delay: 0.5s; }
+.letter-5 { animation-delay: 0.6s; }
+.letter-6 { animation-delay: 0.7s; }
+.letter-7 { animation-delay: 0.8s; }
+.letter-8 { animation-delay: 0.9s; }
+.letter-9 { animation-delay: 1.0s; }
+.letter-10 { animation-delay: 1.1s; }
+
+.building-container {
+    position: relative;
+    padding: 1rem;
+    width: 100%; /* Full width to ensure it takes up the screen */
+}
+
+.building-text {
+    display: flex;
+    flex-direction: column; /* Stack letters vertically on smaller screens */
+    align-items: center; /* Center the building text */
+    max-width: 180px; /* Limit width to prevent overflow */
+    margin: 0 auto; /* Center align */
+    gap: 0.4rem;
+}
+
+.building-row {
+    display: flex;
+    align-items: center; /* Center letters vertically */
+    margin: 0.2rem 0; /* Add vertical spacing */
+}
+
+/* Roof styles to create a slanted effect */
+.roof {
+    width: 0; 
+    height: 0; 
+    border-left: 40px solid transparent; /* Adjust for screen size */
+    border-right: 40px solid transparent; /* Adjust for screen size */
+    border-bottom: 30px solid white; /* Triangle color */
+    position: relative;
+    margin: 0 auto; /* Center the roof */
+}
+
+/* Divider styles */
+.divider {
+    width: 2px; /* Width of the vertical divider */
+    height: 50px; /* Height of the vertical divider */
+    background: white; /* Color of the divider */
+    margin: 0 0.5rem; /* Spacing around the divider */
+}
+
+/* Responsive font sizes */
+.letter {
+    font-size: 2rem; /* Adjust size for better visibility on mobile */
+    color: white; /* Ensure visibility against the background */
+}
+
+/* Ensure smaller screens have adjusted styles */
+@media (max-width: 640px) {
+    .letter {
+        font-size: 2rem; /* Smaller font for mobile */
+    }
+    .roof {
+        border-left: 30px solid transparent; /* Smaller slant */
+        border-right: 30px solid transparent; /* Smaller slant */
+    }
+    .divider {
+        height: 30px; /* Smaller divider on mobile */
+    }
+}

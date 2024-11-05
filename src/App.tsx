@@ -21,7 +21,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-x-hidden">
+    <div className="bg-gradient-to-r from-orange-400 to-blue-500 dark:bg-gray-900 dark:text-white duration-200 overflow-x-hidden">
       <Navbar />
       <Hero />
       <Services />

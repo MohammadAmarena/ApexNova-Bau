@@ -34,14 +34,14 @@ const ServiceData = [
   },
   {
     id: 6,
-    name: "Küchenmontage",
+    name: "Garten und Landschaftsbau",
     text: "Komplette Küchenmontage mit Liebe zum Detail. Wir gestalten Ihre Traumküche nach Ihren Wünschen.",
     img: "https://picsum.photos/106/106",
   },
 ];
 
 const Testimonials = () => {
-  var settings = {
+  const settings = {
     dots: true,
     arrows: false,
     infinite: true,
@@ -51,38 +51,26 @@ const Testimonials = () => {
     autoplaySpeed: 2000,
     cssEase: "linear",
     pauseOnHover: true,
-    pauseOnFocus: true,
     responsive: [
       {
         breakpoint: 10000,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-        },
+        settings: { slidesToShow: 3 },
       },
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 2,
-        },
+        settings: { slidesToShow: 2 },
       },
       {
         breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
+        settings: { slidesToShow: 1 },
       },
     ],
   };
 
   return (
     <div className="py-10 mb-10">
-      <div className="container ">
-        {/* Header section */}
+      <div className="container">
+        {/* Header Section */}
         <div className="mb-10">
           <h1
             data-aos="fade-up"
@@ -92,26 +80,27 @@ const Testimonials = () => {
           </h1>
         </div>
 
-        {/* Testimonial cards */}
+        {/* Service Cards Slider */}
         <div data-aos="zoom-in">
           <Slider {...settings}>
-            {ServiceData.map((data) => (
-              <div key={data.id} className="mx-1"> {/* Added horizontal margin */}
-                <div className="flex flex-col m-1 gap-3 shadow-lg rounded-xl relative overflow-hidden bg-primary/10 my-4"> {/* Added vertical margin */}
-                  {/* Container for the image */}
-                  <div className="w-full h-48 relative"> 
+            {ServiceData.map((service) => (
+              <div key={service.id} className="px-2">
+                <div className="flex flex-col shadow-lg rounded-xl overflow-hidden bg-primary/10 m-4">
+                  {/* Image Section */}
+                  <div className="w-full h-48 relative">
                     <img
-                      src={data.img}
-                      alt={data.name}
-                      className="w-full h-full object-cover" // Full width and height
+                      src={service.img}
+                      alt={service.name}
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                  {/* Content section */}
-                  <div className="flex flex-col items-center gap-4 p-6 bg-black/80 text-white font-cursive2"> 
-                    <h1 className="text-xl font-bold">{data.name}</h1>
-                    <p className="text-xs text-gray-300">{data.text}</p>
+                  {/* Text Content */}
+                  <div className="flex flex-col items-center gap-3 p-6 bg-black/80 text-white">
+                    <h1 className="text-xl font-bold">{service.name}</h1>
+                    <p className="text-xs text-gray-300">{service.text}</p>
                   </div>
-                  <p className="text-black/20 text-9xl font-serif absolute top-0 right-0">
+                  {/* Decorative Quote Mark */}
+                  <p className="text-black/20 text-9xl font-serif absolute top-0 right-4">
                     ,,
                   </p>
                 </div>
