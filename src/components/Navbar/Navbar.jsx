@@ -29,7 +29,7 @@ const Navbar = () => {
                 className="text-3xl"
                 style={{ color: "orange" }}
               />
-              ابو بشير للسياحة والسفر
+              `عايش العليان للديكور والدهان`
             </a>
           </div>
 
