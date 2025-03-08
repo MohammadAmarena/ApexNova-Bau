@@ -29,7 +29,7 @@ const Navbar = () => {
                 className="text-3xl"
                 style={{ color: "orange" }}
               />
-              `عايش العليان للديكور والدهان`
+              `عايش عليان للديكور والدهان`
             </a>
           </div>
 

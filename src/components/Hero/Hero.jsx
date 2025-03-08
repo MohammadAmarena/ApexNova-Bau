@@ -1,6 +1,6 @@
 import React from "react";
-import './Hero.css'; // Updated CSS for the new animations and structure
-import heroImage from '../../assets/IMG_0018.jpg'; // Import your image
+import "./Hero.css"; // Updated CSS for the new animations and structure
+import heroImage from "../../assets/IMG_0018.jpg"; // Import your image
 
 const Hero = () => {
   const scrollToBottom = () => {
@@ -76,22 +76,22 @@ const Hero = () => {
                 <div className="building-row apex-row">
                   <span className="letter letter-4">N</span>
                   <div className="divider"></div>
-                    <span className="letter letter-5">o</span>
-                    <div className="divider"></div>
-                    <span className="letter letter-6">v</span>
-                    <div className="divider"></div>
-                    <span className="letter letter-7">a</span>
-                  </div>
-                  <div className="building-row building-bottom">
-                    <span className="letter letter-8">B</span>
-                    <div className="divider"></div>
-                    <span className="letter letter-9">a</span>
-                    <div className="divider"></div>
-                    <span className="letter letter-10">u</span>
-                  </div>
-                  <p className="slogan">Nachhaltigkeit und Innovation</p>
+                  <span className="letter letter-5">o</span>
+                  <div className="divider"></div>
+                  <span className="letter letter-6">v</span>
+                  <div className="divider"></div>
+                  <span className="letter letter-7">a</span>
                 </div>
+                <div className="building-row building-bottom">
+                  <span className="letter letter-8">B</span>
+                  <div className="divider"></div>
+                  <span className="letter letter-9">a</span>
+                  <div className="divider"></div>
+                  <span className="letter letter-10">u</span>
+                </div>
+                <p className="slogan">Nachhaltigkeit und Innovation</p>
               </div>
+            </div>
           </div>
         </div>
       </div>
