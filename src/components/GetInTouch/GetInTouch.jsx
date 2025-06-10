@@ -67,7 +67,7 @@ const ToolInfo = () => {
               <li>✅ Persönliche Beratung & maßgeschneiderte Lösungen</li>
               <li>✅ Höchste Qualitätsstandards in jedem Detail</li>
               <li>✅ Termintreue und zuverlässige Umsetzung</li>
-              <li>✅ Über 10 Jahre Erfahrung in der Baubranche</li>
+              <li>✅ Über 15 Jahre Erfahrung in der Baubranche</li>
             </ul>
           </div>
         </div>

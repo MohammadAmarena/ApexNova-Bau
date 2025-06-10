@@ -1,84 +1,279 @@
-import React from "react";
-import serviceImg from "../../assets/img1.jpg";
+import React, { useState } from "react";
 
 const ServicesData = [
   {
     id: 1,
-    img: serviceImg,
-    name: "Entwurf & Planung",
+    name: "Präzisions-CAD Konstruktion",
     description:
-      "Individuelle und präzise Baupläne, die auf Ihre Vision und Anforderungen zugeschnitten sind.",
-    aosDelay: "100",
+      "Millimetergenaue technische Zeichnungen für Maschinenbau, Anlagentechnik und Produktentwicklung. Von der Idee bis zur fertigen Konstruktionszeichnung.",
+    icon: "📏",
+    code: "CAD_TECH",
   },
   {
     id: 2,
-    img: serviceImg,
-    name: "Projektleitung",
+    name: "Architektur & Bauplanung",
     description:
-      "Ganzheitliches Management aller Bauphasen – zuverlässig, termingerecht und effizient.",
-    aosDelay: "300",
+      "Vollständige Planungssätze für Wohn- und Gewerbebau. Grundrisse, Schnitte, Ansichten - alles nach aktuellen Bauvorschriften und DIN-Normen.",
+    icon: "🏗️",
+    code: "ARCH_PLAN",
   },
   {
     id: 3,
-    img: serviceImg,
-    name: "Standortanalyse",
+    name: "3D-Visualisierung & Rendering",
     description:
-      "Exakte Gelände- und Standortvermessung zur optimalen Vorbereitung Ihres Bauprojekts.",
-    aosDelay: "500",
+      "Fotorealistische 3D-Darstellungen und Animationen. Ihre Projekte werden lebendig - für Präsentationen, Marketing und Planungsabstimmung.",
+    icon: "🎯",
+    code: "3D_VIZ",
   },
 ];
 
 const Services = () => {
+  const [isActivated, setIsActivated] = useState(false);
+  const [activeCard, setActiveCard] = useState(null);
+
+  const handleSystemActivation = () => {
+    setIsActivated(true);
+
+    const emailSubject = encodeURIComponent(
+      "Professionelle Zeichnungsdienstleistungen - Anfrage"
+    );
+    const emailBody = encodeURIComponent(
+      `Sehr geehrte Damen und Herren,
+
+ich interessiere mich für Ihre Dienstleistungen im Bereich technische Zeichnungen:
+
+• Präzisions-CAD Konstruktion
+• Architektur & Bauplanung
+• 3D-Visualisierung & Rendering
+
+Gerne möchte ich weitere Details zu Ihren Leistungen und ein unverbindliches Angebot erhalten.
+
+Mit freundlichen Grüßen`
+    );
+
+    window.location.href = `mailto:info@profi-zeichnungen.de?subject=${emailSubject}&body=${emailBody}`;
+
+    setTimeout(() => {
+      setIsActivated(false);
+    }, 3000);
+  };
+
   return (
-    <>
-      <span id="services"></span>
+    <div
+      className="min-h-screen py-20 px-4 relative overflow-hidden"
+      style={{ backgroundColor: "#12100f" }} // dunkler Hintergrund (nahe Schwarz)
+    >
+      {/* Gitterhintergrund in #8d8664 transparent */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(#8d8664 1px, transparent 1px),
+            linear-gradient(90deg, #8d8664 1px, transparent 1px)
+          `,
+          backgroundSize: "50px 50px",
+        }}
+      ></div>
 
-      {/* Styled Divider Line */}
-      <div className="relative z-10 -mt-4 mb-12">
-        <div className="mx-auto w-44 h-1 rounded-full bg-gradient-to-r from-[#306ab2] to-[#8d8664] shadow-md"></div>
-      </div>
-
-      <div className="py-10 bg-white">
-        <div className="container">
-          {/* Heading */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl font-bold font-cursive2 text-[#306ab2] drop-shadow">
-              Unsere Leistungen
-            </h1>
-            <p className="text-gray-600 mt-2 max-w-md mx-auto">
-              Hochwertige Baudienstleistungen für Ihre Zukunft – innovativ und nachhaltig.
-            </p>
+      <div className="relative max-w-7xl mx-auto text-white">
+        {/* Header */}
+        <header className="text-center mb-20 px-2">
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
+            TECHNISCHE
+            <br />
+            ZEICHNUNGEN
+          </h1>
+          <div className="flex justify-center items-center space-x-4 mb-8">
+            <div
+              className="w-24 h-1 rounded"
+              style={{ backgroundColor: "#8d8664" }}
+            ></div>
+            <div
+              className="w-5 h-5 rotate-45 rounded-sm"
+              style={{ backgroundColor: "#306ab2" }}
+            ></div>
+            <div
+              className="w-24 h-1 rounded"
+              style={{ backgroundColor: "#8d8664" }}
+            ></div>
           </div>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
+            Wo{" "}
+            <span style={{ color: "#8d8664" }} className="font-semibold">
+              Präzision
+            </span>{" "}
+            auf{" "}
+            <span style={{ color: "#306ab2" }} className="font-semibold">
+              Innovation
+            </span>{" "}
+            trifft
+          </p>
+        </header>
 
-          {/* Service Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 md:gap-5 place-items-center">
-            {ServicesData.map((service) => (
-              <div
+        {/* Services Grid */}
+        <section className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 px-2">
+          {ServicesData.map((service, idx) => {
+            const isActive = activeCard === service.id;
+            const color = idx % 2 === 0 ? "#8d8664" : "#306ab2";
+
+            return (
+              <article
                 key={service.id}
-                data-aos="fade-up"
-                data-aos-delay={service.aosDelay}
-                className="rounded-2xl bg-white hover:bg-gradient-to-br from-[#8d8664] to-[#306ab2] hover:text-white shadow-xl duration-300 group max-w-[300px]"
+                onMouseEnter={() => setActiveCard(service.id)}
+                onMouseLeave={() => setActiveCard(null)}
+                className={`relative rounded-xl border-2 p-8 cursor-pointer transform transition duration-500 ease-in-out
+                  ${
+                    isActive
+                      ? `bg-${color}20 border-[${color}] scale-105 shadow-lg`
+                      : `bg-transparent border-[${color}] hover:bg-${color}10 hover:border-[${color}]`
+                  }
+                `}
+                style={{
+                  borderColor: color,
+                  backgroundColor: isActive ? color + "22" : "transparent",
+                  boxShadow: isActive ? `0 0 12px ${color}` : "none",
+                }}
+                aria-label={service.name}
               >
-                <div className="h-[122px]">
-                  <img
-                    src={service.img}
-                    alt={service.name}
-                    className="max-w-[200px] block mx-auto transform -translate-y-14
-                      group-hover:scale-105 group-hover:rotate-1 duration-300 rounded-xl shadow-md"
-                  />
+                {/* Top Accent Bar */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-1 rounded-t"
+                  style={{
+                    backgroundColor: isActive ? color : "transparent",
+                    transition: "background-color 0.5s ease",
+                  }}
+                ></div>
+
+                {/* Icon & Code */}
+                <div className="flex justify-between items-center mb-6">
+                  <div
+                    className="text-5xl transition-transform duration-300"
+                    style={{ color: color }}
+                  >
+                    {service.icon}
+                  </div>
+                  <div
+                    className="px-3 py-1 text-xs font-mono rounded-full border transition-colors duration-300 select-none"
+                    style={{
+                      borderColor: color,
+                      color: isActive ? color : "white",
+                    }}
+                  >
+                    {service.code}
+                  </div>
                 </div>
-                <div className="p-4 text-center">
-                  <h1 className="text-xl font-bold">{service.name}</h1>
-                  <p className="text-gray-600 group-hover:text-white duration-300 text-sm line-clamp-3">
-                    {service.description}
-                  </p>
+
+                {/* Visual Box */}
+                <div
+                  className="mb-8 h-32 rounded-lg border border-white/10 flex items-center justify-center relative overflow-hidden"
+                  style={{ backgroundColor: "rgba(0,0,0,0.25)" }}
+                >
+                  <div
+                    className="absolute inset-0 opacity-20"
+                    style={{
+                      backgroundImage: `
+                        linear-gradient(${color} 1px, transparent 1px),
+                        linear-gradient(90deg, ${color} 1px, transparent 1px)
+                      `,
+                      backgroundSize: "20px 20px",
+                    }}
+                  ></div>
+                  <div className="relative z-10 text-center select-none" style={{ color }}>
+                    <div className="text-4xl mb-1">{service.icon}</div>
+                    <div className="text-xs font-mono text-opacity-70">
+                      PROJECT_{service.id.toString().padStart(3, "0")}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+
+                {/* Text Content */}
+                <h3
+                  className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-white"
+                  }`}
+                >
+                  {service.name}
+                </h3>
+                <p
+                  className={`text-white/80 leading-relaxed transition-colors duration-300 ${
+                    isActive ? "text-white" : "text-white/80"
+                  }`}
+                >
+                  {service.description}
+                </p>
+
+                {/* Bottom Indicator */}
+                <div
+                  className="absolute bottom-4 left-8 right-8 h-px rounded"
+                  style={{
+                    backgroundColor: isActive ? color : "rgba(255, 255, 255, 0.1)",
+                    boxShadow: isActive ? `0 0 10px ${color}` : "none",
+                    transition: "all 0.5s ease",
+                  }}
+                ></div>
+
+                {/* Service Number */}
+                <div
+                  className="absolute -top-5 -right-5 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shadow-lg select-none"
+                  style={{
+                    backgroundColor: color,
+                    color: "#000",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.6)",
+                    userSelect: "none",
+                  }}
+                >
+                  {service.id}
+                </div>
+              </article>
+            );
+          })}
+        </section>
+
+        {/* Call to Action */}
+        <div className="text-center mt-24 px-2">
+          <button
+            onClick={handleSystemActivation}
+            className={`relative inline-block px-12 py-4 text-xl font-bold rounded-lg border-2 overflow-hidden transition-transform duration-300 transform
+              ${
+                isActivated
+                  ? "bg-white text-black border-white"
+                  : "bg-transparent text-white border-white hover:bg-gradient-to-r hover:from-[#8d8664] hover:to-[#306ab2] hover:text-black"
+              }
+            `}
+            style={{
+              background: isActivated ? "white" : "transparent",
+              borderColor: "white",
+            }}
+          >
+            <span className="relative z-10">
+              {isActivated
+                ? "EMAIL WIRD GEÖFFNET..."
+                : "KOSTENLOSES ANGEBOT ERHALTEN"}
+            </span>
+
+            {!isActivated && (
+              <div
+                className="absolute inset-0 opacity-0 hover:opacity-30 transition-opacity duration-300"
+                style={{
+                  background: "linear-gradient(45deg, #8d8664, #306ab2)",
+                  borderRadius: "0.5rem",
+                }}
+              ></div>
+            )}
+          </button>
+
+          <p
+            className={`font-mono text-sm mt-6 transition-colors duration-300 ${
+              isActivated ? "text-white" : "text-gray-400"
+            }`}
+          >
+            {isActivated
+              ? "▶ Öffne Email-Client..."
+              : "▶ Professionell • Schnell • Zuverlässig"}
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
