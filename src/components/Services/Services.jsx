@@ -51,7 +51,7 @@ Gerne möchte ich weitere Details zu Ihren Leistungen und ein unverbindliches An
 Mit freundlichen Grüßen`
     );
 
-    window.location.href = `mailto:info@profi-zeichnungen.de?subject=${emailSubject}&body=${emailBody}`;
+    window.location.href = `mailto:info@apexnova-bau.de?subject=${emailSubject}&body=${emailBody}`;
 
     setTimeout(() => {
       setIsActivated(false);
