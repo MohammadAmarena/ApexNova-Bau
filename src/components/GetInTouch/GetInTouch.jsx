@@ -43,7 +43,7 @@ const GetInTouch = () => {
     {
       icon: <HiPhone className="text-2xl" />,
       title: "Telefon", 
-      info: "+49 (0) 123 456 789",
+      info: "+49 (0) 176 643 292 42",
       action: () => window.location.href = "tel:+491234567890"
     },
     {
