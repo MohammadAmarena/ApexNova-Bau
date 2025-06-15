@@ -1,0 +1,478 @@
+// Banner.scss - Modern SCSS with latest features
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:map';
+
+// CSS Custom Properties for dynamic theming
+:root {
+  --banner-gradient-start: #8d8664;
+  --banner-gradient-end: #306ab2;
+  --banner-text-primary: #ffffff;
+  --banner-text-secondary: rgba(255, 255, 255, 0.9);
+  --banner-text-tertiary: rgba(255, 255, 255, 0.85);
+  --banner-text-muted: rgba(255, 255, 255, 0.7);
+  --banner-accent: #fbbf24;
+  --banner-shadow-light: rgba(0, 0, 0, 0.4);
+  --banner-shadow-heavy: rgba(0, 0, 0, 0.6);
+  --banner-border-overlay: rgba(255, 255, 255, 0.2);
+  --banner-bg-overlay: rgba(255, 255, 255, 0.1);
+}
+
+// Modern color palette using SCSS functions
+$colors: (
+  'primary': #306ab2,
+  'secondary': #8d8664,
+  'accent': #fbbf24,
+  'white': #ffffff,
+  'black': #000000
+);
+
+// Spacing system
+$spacing: (
+  'xs': 0.25rem,
+  'sm': 0.5rem,
+  'md': 1rem,
+  'lg': 1.5rem,
+  'xl': 2rem,
+  '2xl': 3rem,
+  '3xl': 4rem
+);
+
+// Typography scale
+$font-sizes: (
+  'xs': 0.75rem,
+  'sm': 0.875rem,
+  'base': 1rem,
+  'lg': 1.125rem,
+  'xl': 1.25rem,
+  '2xl': 1.5rem,
+  '3xl': 1.875rem,
+  '4xl': 2.25rem,
+  '5xl': 3rem
+);
+
+// Modern mixins using @use
+@mixin gradient-bg($start: var(--banner-gradient-start), $end: var(--banner-gradient-end)) {
+  background: linear-gradient(90deg, #{$start} 0%, #{$end} 100%);
+}
+
+@mixin glass-morphism($opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@mixin hover-transform($scale: 1.05, $duration: 0.3s) {
+  transition: transform #{$duration} cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+@mixin text-shadow-glow($color: rgba(0, 0, 0, 0.5)) {
+  text-shadow: 0 2px 4px $color, 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@mixin responsive-container() {
+  container-type: inline-size;
+  
+  @container (max-width: 768px) {
+    padding-inline: 1rem;
+  }
+  
+  @container (min-width: 1200px) {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+}
+
+// Banner section
+.banner-section {
+  @include gradient-bg();
+  color: var(--banner-text-primary);
+  padding-block: map.get($spacing, '3xl');
+  position: relative;
+  overflow: hidden;
+  
+  // Modern container queries
+  @include responsive-container();
+  
+  // Pseudo-element for additional visual effects
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 30% 20%, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+}
+
+.banner-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: map.get($spacing, '2xl');
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  
+  // Modern logical properties
+  padding-inline: map.get($spacing, 'lg');
+  margin-inline: auto;
+  max-inline-size: 1200px;
+}
+
+// Image styling with modern features
+.banner-image {
+  display: flex;
+  justify-content: center;
+  
+  img {
+    border-radius: 0.5rem;
+    inline-size: min(24rem, 100%);
+    block-size: 18rem;
+    object-fit: cover;
+    filter: drop-shadow(0 10px 40px var(--banner-shadow-light));
+    border: 4px solid var(--banner-border-overlay);
+    
+    @include hover-transform(1.05, 0.5s);
+    
+    &:hover {
+      filter: drop-shadow(0 15px 50px var(--banner-shadow-heavy));
+    }
+  }
+}
+
+// Content area
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'lg');
+}
+
+.banner-title {
+  font-size: clamp(map.get($font-sizes, '3xl'), 5vw, map.get($font-sizes, '5xl'));
+  font-weight: 700;
+  font-family: cursive;
+  color: var(--banner-text-primary);
+  @include text-shadow-glow();
+  
+  // Modern text decoration
+  text-wrap: balance;
+  line-height: 1.1;
+}
+
+.banner-description {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'md');
+  
+  p {
+    font-size: map.get($font-sizes, 'lg');
+    color: var(--banner-text-secondary);
+    line-height: 1.6;
+    text-wrap: pretty;
+    
+    &:nth-child(2) {
+      font-size: map.get($font-sizes, 'base');
+      color: var(--banner-text-tertiary);
+    }
+    
+    strong {
+      font-weight: 600;
+    }
+    
+    em {
+      font-style: italic;
+      color: var(--banner-accent);
+    }
+  }
+}
+
+// Trust signals
+.trust-signals {
+  display: flex;
+  align-items: center;
+  gap: map.get($spacing, 'md');
+  padding-block: map.get($spacing, 'sm');
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'xs');
+    
+    .star {
+      color: var(--banner-accent);
+      font-size: map.get($font-sizes, 'sm');
+      
+      // Animation for stars
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation: twinkle 2s ease-in-out #{$i * 0.2s} infinite alternate;
+        }
+      }
+    }
+    
+    span {
+      font-size: map.get($font-sizes, 'sm');
+      color: var(--banner-text-secondary);
+      margin-inline-start: map.get($spacing, 'sm');
+    }
+  }
+}
+
+// Contact information
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: map.get($spacing, 'lg');
+  padding-block: map.get($spacing, 'sm');
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+    
+    .icon {
+      color: rgba(255, 255, 255, 0.8);
+      transition: color 0.3s ease;
+    }
+    
+    span {
+      font-size: map.get($font-sizes, 'sm');
+    }
+    
+    &:hover .icon {
+      color: var(--banner-accent);
+    }
+  }
+}
+
+// Service features grid
+.service-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: map.get($spacing, 'lg');
+  
+  .features-list {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'md');
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: map.get($spacing, 'md');
+      
+      .feature-icon {
+        font-size: map.get($font-sizes, '3xl');
+        padding: map.get($spacing, 'sm');
+        border-radius: 50%;
+        background: var(--banner-bg-overlay);
+        color: var(--banner-text-primary);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        &:hover {
+          transform: rotate(5deg) scale(1.1);
+          background: var(--banner-accent);
+          color: map.get($colors, 'black');
+        }
+      }
+      
+      .feature-content {
+        .feature-title {
+          font-size: map.get($font-sizes, 'lg');
+          font-weight: 500;
+          display: block;
+          margin-block-end: map.get($spacing, 'xs');
+        }
+        
+        .feature-subtitle {
+          font-size: map.get($font-sizes, 'xs');
+          color: var(--banner-text-muted);
+        }
+      }
+    }
+  }
+  
+  .quality-block {
+    border-inline-start: 4px solid rgba(255, 255, 255, 0.4);
+    padding-inline-start: map.get($spacing, 'lg');
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'md');
+    
+    .quality-title {
+      font-size: map.get($font-sizes, '2xl');
+      font-family: cursive;
+      font-weight: 600;
+      color: var(--banner-text-primary);
+    }
+    
+    .quality-description {
+      font-size: map.get($font-sizes, 'sm');
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+      
+      strong {
+        font-weight: 600;
+      }
+    }
+    
+    .service-areas {
+      font-size: map.get($font-sizes, 'xs');
+      color: var(--banner-text-muted);
+      
+      p {
+        margin-block-end: map.get($spacing, 'xs');
+        
+        &:first-child {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+// CTA Button
+.cta-section {
+  padding-block-start: map.get($spacing, 'md');
+  
+  .cta-button {
+    display: inline-block;
+    background: var(--banner-text-primary);
+    color: map.get($colors, 'primary');
+    padding: map.get($spacing, 'md') map.get($spacing, '2xl');
+    border-radius: 9999px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      background: color.adjust(#ffffff, $lightness: -5%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Additional SEO section
+.seo-section {
+  margin-block-start: map.get($spacing, '3xl');
+  display: flex;
+  justify-content: center;
+  
+  .seo-content {
+    @include glass-morphism(0.1);
+    border-radius: 0.5rem;
+    padding: map.get($spacing, '2xl');
+    max-inline-size: 64rem;
+    
+    .seo-title {
+      font-size: map.get($font-sizes, '3xl');
+      font-weight: 700;
+      margin-block-end: map.get($spacing, 'lg');
+      text-align: center;
+    }
+    
+    .seo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: map.get($spacing, 'lg');
+      text-align: center;
+      
+      .seo-item {
+        .seo-item-title {
+          font-size: map.get($font-sizes, 'xl');
+          font-weight: 600;
+          margin-block-end: map.get($spacing, 'sm');
+        }
+        
+        .seo-item-text {
+          font-size: map.get($font-sizes, 'sm');
+          color: rgba(255, 255, 255, 0.8);
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes twinkle {
+  from {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// Modern media queries using ranges
+@media (width <= 768px) {
+  .banner-container {
+    grid-template-columns: 1fr;
+    gap: map.get($spacing, 'xl');
+  }
+  
+  .contact-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: map.get($spacing, 'sm');
+  }
+  
+  .service-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width >= 1200px) {
+  .banner-image img {
+    inline-size: 28rem;
+    block-size: 20rem;
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  :root {
+    --banner-text-primary: #f8fafc;
+    --banner-text-secondary: rgba(248, 250, 252, 0.9);
+    --banner-shadow-light: rgba(0, 0, 0, 0.6);
+    --banner-shadow-heavy: rgba(0, 0, 0, 0.8);
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

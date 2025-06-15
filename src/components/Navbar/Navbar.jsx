@@ -41,7 +41,7 @@ const Navbar = () => {
   }, []);
 
   const handleMailClick = () => {
-    window.location.href = "mailto:apexnova.bau@gmail.com";
+    window.location.href = "mailto:info@apexnova_bau.de";
     setMenuOpen(false);
   };
 

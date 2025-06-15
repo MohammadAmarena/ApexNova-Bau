@@ -1,5 +1,5 @@
 import React from "react";
-import "./Hero.css";
+import "./Hero.scss";
 import heroImage from "../../assets/LOGO.png";
 
 const Hero = () => {
@@ -34,7 +34,7 @@ const Hero = () => {
                   data-aos="fade-up"
                   data-aos-once="true"
                   className="hero-title"
-                >
+                > Die WebSeite ist noch in Bearbeitung <br/>
                   Ihre Träume werden zu{" "}
                   <span
                     data-aos="zoom-out"

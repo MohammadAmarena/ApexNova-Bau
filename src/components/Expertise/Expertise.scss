@@ -1,0 +1,599 @@
+// OurServices.scss - Modern SCSS with latest features
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:list';
+
+// CSS Custom Properties for dynamic theming
+:root {
+  --services-gradient-start: rgba(141, 134, 100, 0.1);
+  --services-gradient-end: rgba(48, 106, 178, 0.1);
+  --services-primary: #306ab2;
+  --services-secondary: #8d8664;
+  --services-text-primary: #374151;
+  --services-text-secondary: #6b7280;
+  --services-white: #ffffff;
+  --services-shadow: rgba(0, 0, 0, 0.1);
+  --services-shadow-hover: rgba(0, 0, 0, 0.15);
+  --services-border-radius: 1rem;
+  --services-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Modern color system with semantic naming
+$color-palette: (
+  'primary': #306ab2,
+  'secondary': #8d8664,
+  'neutral': (
+    50: #f9fafb,
+    100: #f3f4f6,
+    200: #e5e7eb,
+    300: #d1d5db,
+    400: #9ca3af,
+    500: #6b7280,
+    600: #4b5563,
+    700: #374151,
+    800: #1f2937,
+    900: #111827
+  ),
+  'white': #ffffff,
+  'black': #000000
+);
+
+// Spacing scale using fluid typography
+$spacing-scale: (
+  'xs': clamp(0.25rem, 0.5vw, 0.5rem),
+  'sm': clamp(0.5rem, 1vw, 0.75rem),
+  'md': clamp(1rem, 2vw, 1.5rem),
+  'lg': clamp(1.5rem, 3vw, 2rem),
+  'xl': clamp(2rem, 4vw, 3rem),
+  '2xl': clamp(3rem, 6vw, 4rem),
+  '3xl': clamp(4rem, 8vw, 6rem),
+  '4xl': clamp(6rem, 12vw, 8rem)
+);
+
+// Typography scale
+$font-scale: (
+  'xs': clamp(0.75rem, 1.5vw, 0.875rem),
+  'sm': clamp(0.875rem, 2vw, 1rem),
+  'base': clamp(1rem, 2.5vw, 1.125rem),
+  'lg': clamp(1.125rem, 3vw, 1.25rem),
+  'xl': clamp(1.25rem, 3.5vw, 1.5rem),
+  '2xl': clamp(1.5rem, 4vw, 1.875rem),
+  '3xl': clamp(1.875rem, 5vw, 2.25rem),
+  '4xl': clamp(2.25rem, 6vw, 3rem),
+  '5xl': clamp(3rem, 8vw, 4rem)
+);
+
+// Advanced mixins using modern SCSS features
+@mixin gradient-background($start, $end, $direction: 'to bottom') {
+  background: linear-gradient(#{$direction}, #{$start}, #{$end});
+}
+
+@mixin glass-card($blur: 16px, $opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+@mixin hover-lift($scale: 1.02, $shadow: var(--services-shadow-hover)) {
+  transition: var(--services-transition);
+  
+  &:hover {
+    transform: translateY(-4px) scale($scale);
+    box-shadow: 0 12px 24px $shadow;
+  }
+}
+
+@mixin focus-ring($color: var(--services-primary)) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+@mixin container-fluid($max-width: 1200px) {
+  container-type: inline-size;
+  max-inline-size: $max-width;
+  margin-inline: auto;
+  padding-inline: map.get($spacing-scale, 'md');
+}
+
+// Modern animation functions
+@function ease-out-quart() {
+  @return cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@function ease-in-out-back() {
+  @return cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+// Services section
+.services-section {
+  @include gradient-background(
+    var(--services-gradient-start), 
+    var(--services-gradient-end)
+  );
+  padding-block: map.get($spacing-scale, '4xl');
+  position: relative;
+  overflow: hidden;
+  
+  // Decorative background elements
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(48, 106, 178, 0.05) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  
+  &::before {
+    width: 40rem;
+    height: 40rem;
+    top: -20rem;
+    right: -20rem;
+    animation: float 20s ease-in-out infinite;
+  }
+  
+  &::after {
+    width: 30rem;
+    height: 30rem;
+    bottom: -15rem;
+    left: -15rem;
+    animation: float 25s ease-in-out infinite reverse;
+  }
+}
+
+.services-container {
+  @include container-fluid();
+  position: relative;
+  z-index: 1;
+}
+
+// Header section
+.services-header {
+  text-align: center;
+  margin-block-end: map.get($spacing-scale, '3xl');
+  
+  .services-title {
+    font-size: map.get($font-scale, '5xl');
+    font-weight: 700;
+    font-family: cursive;
+    color: var(--services-primary);
+    margin-block-end: map.get($spacing-scale, 'sm');
+    
+    // Modern text effects
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(
+      45deg,
+      var(--services-primary),
+      var(--services-secondary)
+    );
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    
+    // Fallback for browsers that don't support background-clip
+    @supports not (background-clip: text) {
+      background-image: none;
+      -webkit-text-fill-color: initial;
+      color: var(--services-primary);
+    }
+  }
+  
+  .services-subtitle {
+    font-size: map.get($font-scale, 'sm');
+    color: var(--services-text-secondary);
+    max-inline-size: 32rem;
+    margin-inline: auto;
+    line-height: 1.6;
+  }
+}
+
+// Slider container
+.services-slider {
+  position: relative;
+  
+  // Override react-slick styles with modern CSS
+  :global(.slick-dots) {
+    bottom: -3rem;
+    
+    li {
+      margin: 0 map.get($spacing-scale, 'xs');
+      
+      button {
+        &::before {
+          font-size: 0.75rem;
+          color: var(--services-primary);
+          opacity: 0.5;
+          transition: all 0.3s ease;
+        }
+      }
+      
+      &.slick-active button::before {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+  }
+  
+  :global(.slick-track) {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  :global(.slick-slide) {
+    padding: map.get($spacing-scale, 'md');
+    
+    > div {
+      height: 100%;
+    }
+  }
+}
+
+// Service card
+.service-card {
+  background: var(--services-white);
+  border-radius: var(--services-border-radius);
+  overflow: hidden;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  @include hover-lift();
+  @include focus-ring();
+  
+  // Modern border with gradient
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      transparent,
+      rgba(48, 106, 178, 0.2),
+      transparent
+    );
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.service-image {
+  position: relative;
+  height: 13rem;
+  overflow: hidden;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-out-quart();
+  }
+  
+  // Overlay effect
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  // Hover effects
+  .service-card:hover & {
+    img {
+      transform: scale(1.05);
+    }
+    
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+.service-content {
+  padding: map.get($spacing-scale, 'lg') map.get($spacing-scale, 'md');
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: map.get($spacing-scale, 'sm');
+  
+  .service-name {
+    font-size: map.get($font-scale, 'xl');
+    font-weight: 600;
+    color: var(--services-secondary);
+    margin-block-end: map.get($spacing-scale, 'sm');
+    
+    // Text animation on hover
+    transition: color 0.3s ease;
+    
+    .service-card:hover & {
+      color: var(--services-primary);
+    }
+  }
+  
+  .service-description {
+    font-size: map.get($font-scale, 'sm');
+    color: var(--services-text-secondary);
+    line-height: 1.6;
+    text-wrap: balance;
+  }
+}
+
+// Responsive design using modern CSS
+@container (max-width: 640px) {
+  .services-header .services-title {
+    font-size: map.get($font-scale, '3xl');
+  }
+  
+  .service-image {
+    height: 10rem;
+  }
+  
+  .service-content {
+    padding: map.get($spacing-scale, 'md');
+  }
+}
+
+@container (min-width: 1024px) {
+  .services-slider :global(.slick-slide) {
+    padding: map.get($spacing-scale, 'lg') map.get($spacing-scale, 'md');
+  }
+}
+
+// Modern media queries using ranges
+@media (width <= 640px) {
+  .services-section {
+    padding-block: map.get($spacing-scale, '2xl');
+  }
+  
+  .services-header {
+    margin-block-end: map.get($spacing-scale, '2xl');
+  }
+}
+
+@media (width >= 1200px) {
+  .services-container {
+    padding-inline: map.get($spacing-scale, 'xl');
+  }
+}
+
+// Advanced animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-2rem, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .service-card {
+    &:hover {
+      transform: none;
+    }
+  }
+  
+  .service-image img {
+    .service-card:hover & {
+      transform: none;
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .service-card {
+    border: 2px solid var(--services-text-primary);
+    box-shadow: none;
+    
+    .service-name {
+      color: var(--services-text-primary);
+      font-weight: 700;
+    }
+    
+    .service-description {
+      color: var(--services-text-primary);
+    }
+  }
+  
+  .services-header .services-title {
+    background-image: none;
+    -webkit-text-fill-color: initial;
+    color: var(--services-text-primary);
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  :root {
+    --services-gradient-start: rgba(141, 134, 100, 0.2);
+    --services-gradient-end: rgba(48, 106, 178, 0.2);
+    --services-primary: #60a5fa;
+    --services-secondary: #d4b896;
+    --services-text-primary: #f9fafb;
+    --services-text-secondary: #d1d5db;
+    --services-white: #1f2937;
+    --services-shadow: rgba(0, 0, 0, 0.3);
+    --services-shadow-hover: rgba(0, 0, 0, 0.4);
+  }
+  
+  .service-card {
+    background: var(--services-white);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &::before {
+      background: linear-gradient(
+        135deg,
+        transparent,
+        rgba(96, 165, 250, 0.3),
+        transparent
+      );
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .services-section {
+    background: none !important;
+    color: black !important;
+    
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+  
+  .service-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+  
+  .services-slider :global(.slick-dots) {
+    display: none;
+  }
+}
+
+// Modern scroll behavior
+@supports (scroll-behavior: smooth) {
+  .services-section {
+    scroll-behavior: smooth;
+  }
+}
+
+// CSS Houdini support (experimental)
+@supports (background: paint(worklet)) {
+  .service-card {
+    background: paint(shimmer);
+  }
+}
+
+// Modern logical properties support
+@supports (margin-inline: 0) {
+  .services-container {
+    margin-inline: auto;
+    padding-inline: map.get($spacing-scale, 'md');
+  }
+  
+  .services-header .services-subtitle {
+    margin-inline: auto;
+  }
+}
+
+// Utility classes for component variations
+.services-section {
+  // Compact variant
+  &--compact {
+    padding-block: map.get($spacing-scale, '2xl');
+    
+    .services-header {
+      margin-block-end: map.get($spacing-scale, 'xl');
+    }
+    
+    .service-image {
+      height: 10rem;
+    }
+    
+    .service-content {
+      padding: map.get($spacing-scale, 'md');
+    }
+  }
+  
+  // Full-width variant
+  &--full-width {
+    .services-container {
+      max-inline-size: none;
+      padding-inline: map.get($spacing-scale, 'lg');
+    }
+  }
+  
+  // Minimal variant
+  &--minimal {
+    background: none;
+    
+    &::before,
+    &::after {
+      display: none;
+    }
+    
+    .service-card {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      
+      &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
