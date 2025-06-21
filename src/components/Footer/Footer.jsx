@@ -51,7 +51,7 @@ const Footer = () => {
           from_name: formData.name, 
           from_email: formData.email, 
           message: formData.message,
-          to_email: "apexnova.bau@gmail.com"
+          to_email: "info@apexnova-bau.de"
         },
         import.meta.env.VITE_EMAILJS_USER_ID
       );
@@ -152,7 +152,7 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-white/70 text-sm">E-Mail</p>
-                    <a href="mailto:apexnova.bau@gmail.com" className="text-lg font-semibold text-white hover:text-[#8d8664] transition-colors">
+                    <a href="mailto:info@apexnova-bau.de" className="text-lg font-semibold text-white hover:text-[#8d8664] transition-colors">
                       info@apexnova-bau.de
                     </a>
                   </div>
