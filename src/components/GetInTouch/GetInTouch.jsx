@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HiMail, HiPhone, HiLocationMarker, HiClock } from "react-icons/hi";
-import { FaArrowDown, FaTools, FaHome, FaPaintRoller, FaHammer } from "react-icons/fa";
+import { FaArrowDown, FaTools, FaHome, FaPaintRoller, FaHammer, FaBuilding } from "react-icons/fa";
 
 const GetInTouch = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,23 +13,23 @@ const GetInTouch = () => {
   const services = [
     {
       icon: <FaTools className="text-3xl" />,
-      title: "Trockenbau",
-      description: "Professioneller Trockenbau für Wände, Decken und Raumteilungen mit höchster Präzision."
+      title: "Innenausbau",
+      description: "Fachgerechter Ausbau von Innenräumen – von Trockenbau bis individuelle Raumgestaltung."
     },
     {
       icon: <FaHome className="text-3xl" />,
-      title: "Bodenverlegung",
-      description: "Fachgerechte Verlegung von Laminat, Parkett, Fliesen und modernen Bodenbelägen."
+      title: "Renovierung & Sanierung",
+      description: "Komplette oder partielle Erneuerung von Wohn- und Gewerberäumen, innen wie außen."
     },
     {
       icon: <FaPaintRoller className="text-3xl" />,
-      title: "Malerarbeiten",
-      description: "Hochwertige Maler- und Lackierarbeiten für Innen- und Außenbereiche."
+      title: "Maler- & Fassadenarbeiten",
+      description: "Professionelle Anstriche und Putzarbeiten für Innenräume und Außenfassaden."
     },
     {
       icon: <FaHammer className="text-3xl" />,
-      title: "Möbel- & Küchenmontage",
-      description: "Präzise Montage von Möbeln und kompletten Kücheneinrichtungen nach Maß."
+      title: "Montage & Reparaturen",
+      description: "Möbel- und Küchenmontage sowie kleinere handwerkliche Arbeiten nach Maß."
     }
   ];
 
@@ -78,7 +78,7 @@ const GetInTouch = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#8d8664] via-[#306ab2] to-[#1e4a73] relative overflow-hidden">
-      {/* Enhanced Background Pattern */}
+      {/* Hintergrund-Elemente */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-48 h-48 bg-white rounded-full blur-xl animate-pulse delay-1000"></div>
@@ -86,7 +86,6 @@ const GetInTouch = () => {
         <div className="absolute top-20 right-1/3 w-16 h-16 bg-white rounded-full blur-md animate-pulse delay-300"></div>
       </div>
 
-      {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-ping delay-700"></div>
         <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-white/40 rounded-full animate-ping delay-1000"></div>
@@ -96,14 +95,14 @@ const GetInTouch = () => {
       <div className="container mx-auto px-4 py-12 relative z-10">
         <div className={`grid lg:grid-cols-2 gap-12 items-start transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           
-          {/* LEFT: Main Content */}
+          {/* Linke Seite: Beschreibung */}
           <div className="space-y-8 text-white">
             <div className="space-y-6">
               <h1 className="text-4xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                Lassen Sie uns gemeinsam bauen
+                Ihre Bauvorhaben in besten Händen
               </h1>
               <p className="text-white/90 leading-relaxed text-lg lg:text-xl font-light">
-                Ob Trockenbau, Bodenverlegung, Malerarbeiten oder individuelle Möbel- und Küchenmontagen – wir realisieren Ihre Projekte mit Präzision, Qualität und Leidenschaft.
+                Ob Innenausbau, Außenarbeiten, Renovierung, Sanierung oder individuelle Lösungen – wir setzen Ihre Bauprojekte zuverlässig, präzise und mit höchstem Qualitätsanspruch um.
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -125,7 +124,7 @@ const GetInTouch = () => {
               </div>
             </div>
 
-            {/* Enhanced Why Choose Us */}
+            {/* Vorteile */}
             <div className="bg-white/15 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-white/20 hover:bg-white/20 transition-all duration-300">
               <h2 className="text-2xl lg:text-3xl font-semibold mb-6 flex items-center gap-3">
                 <span className="text-yellow-400">⭐</span>
@@ -135,42 +134,39 @@ const GetInTouch = () => {
                 <li className="flex items-start gap-4 group">
                   <span className="text-green-400 text-2xl mt-1 group-hover:scale-125 transition-transform">✓</span>
                   <div>
-                    <strong className="block">Persönliche Beratung & maßgeschneiderte Lösungen</strong>
-                    <span className="text-white/80 text-sm">Individuelle Planung für jeden Kunden</span>
+                    <strong className="block">Individuelle Beratung & Planung</strong>
+                    <span className="text-white/80 text-sm">Maßgeschneiderte Lösungen für Ihre Anforderungen</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-4 group">
                   <span className="text-green-400 text-2xl mt-1 group-hover:scale-125 transition-transform">✓</span>
                   <div>
-                    <strong className="block">Höchste Qualitätsstandards in jedem Detail</strong>
-                    <span className="text-white/80 text-sm">Premium Materialien und Verarbeitung</span>
+                    <strong className="block">Qualität & Präzision</strong>
+                    <span className="text-white/80 text-sm">Hochwertige Materialien und sorgfältige Ausführung</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-4 group">
                   <span className="text-green-400 text-2xl mt-1 group-hover:scale-125 transition-transform">✓</span>
                   <div>
-                    <strong className="block">Termintreue und zuverlässige Umsetzung</strong>
-                    <span className="text-white/80 text-sm">Pünktliche Fertigstellung garantiert</span>
+                    <strong className="block">Zuverlässigkeit & Termintreue</strong>
+                    <span className="text-white/80 text-sm">Verlässliche Planung und fristgerechte Umsetzung</span>
                   </div>
                 </li>
                 <li className="flex items-start gap-4 group">
                   <span className="text-green-400 text-2xl mt-1 group-hover:scale-125 transition-transform">✓</span>
                   <div>
-                    <strong className="block">Über 15 Jahre Erfahrung in der Baubranche</strong>
-                    <span className="text-white/80 text-sm">Bewährte Expertise und Know-how</span>
+                    <strong className="block">Über 15 Jahre Branchenerfahrung</strong>
+                    <span className="text-white/80 text-sm">Kompetenz und Vertrauen seit über einem Jahrzehnt</span>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
 
-          {/* RIGHT: Services & Contact */}
+          {/* Rechte Seite: Leistungen und Kontakt */}
           <div className="space-y-6">
-            
-            {/* Animated Services Showcase */}
             <div className="bg-white/15 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-white/20 text-white">
               <h3 className="text-2xl lg:text-3xl font-semibold mb-6 text-center">Unsere Leistungen</h3>
-              
               <div className="relative h-48 mb-6">
                 {services.map((service, index) => (
                   <div
@@ -189,8 +185,6 @@ const GetInTouch = () => {
                   </div>
                 ))}
               </div>
-
-              {/* Service indicators */}
               <div className="flex justify-center gap-2">
                 {services.map((_, index) => (
                   <button
@@ -206,10 +200,9 @@ const GetInTouch = () => {
               </div>
             </div>
 
-            {/* Enhanced Contact Information */}
+            {/* Kontaktbereich */}
             <div className="bg-white/15 backdrop-blur-md p-8 rounded-2xl shadow-xl border border-white/20 text-white">
               <h3 className="text-2xl lg:text-3xl font-semibold mb-6 text-center">Kontakt aufnehmen</h3>
-              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {contactInfo.map((item, index) => (
                   <div
@@ -238,6 +231,7 @@ const GetInTouch = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
