@@ -44,7 +44,7 @@ const GetInTouch = () => {
       icon: <HiPhone className="text-2xl" />,
       title: "Telefon", 
       info: "+49 (0) 176 643 292 42",
-      action: () => window.location.href = "tel:+491234567890"
+      action: () => window.location.href = "tel:+4917664329242"
     },
     {
       icon: <HiLocationMarker className="text-2xl" />,

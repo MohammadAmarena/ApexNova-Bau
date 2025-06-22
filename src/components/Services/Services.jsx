@@ -1,280 +1,599 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
+import { Wrench, Building, Zap, ArrowRight, Play, Pause } from 'lucide-react';
 
-const ServicesData = [
-  {
-    id: 1,
-    name: "Präzisions-CAD Konstruktion",
-    description:
-      "Millimetergenaue technische Zeichnungen für Maschinenbau, Anlagentechnik und Produktentwicklung. Von der Idee bis zur fertigen Konstruktionszeichnung.",
-    icon: "📏",
-    code: "CAD_TECH",
-  },
-  {
-    id: 2,
-    name: "Architektur & Bauplanung",
-    description:
-      "Vollständige Planungssätze für Wohn- und Gewerbebau. Grundrisse, Schnitte, Ansichten - alles nach aktuellen Bauvorschriften und DIN-Normen.",
-    icon: "🏗️",
-    code: "ARCH_PLAN",
-  },
-  {
-    id: 3,
-    name: "3D-Visualisierung & Rendering",
-    description:
-      "Fotorealistische 3D-Darstellungen und Animationen. Ihre Projekte werden lebendig - für Präsentationen, Marketing und Planungsabstimmung.",
-    icon: "🎯",
-    code: "3D_VIZ",
-  },
-];
-
-const Services = () => {
-  const [isActivated, setIsActivated] = useState(false);
+const ConstructionHub = () => {
   const [activeCard, setActiveCard] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [progress, setProgress] = useState([0, 0, 0]);
+  const [showControls, setShowControls] = useState(false);
+  const progressRefs = useRef([]);
+  const servicesRef = useRef(null);
 
-  const handleSystemActivation = () => {
-    setIsActivated(true);
+  const services = [
+    {
+      id: 1,
+      title: "Smart Bauleitung",
+      description: "KI-gestützte Baustellenkoordination mit Echtzeit-Monitoring und predictive Analytics für optimale Projektabläufe.",
+      icon: <Building size={32} />,
+      color: "gold",
+      stats: { value: "98%", label: "Erfolgsrate" }
+    },
+    {
+      id: 2,
+      title: "Digital Engineering",
+      description: "Revolutionäre 3D-Planung mit VR-Visualisierung und IoT-Integration für die Baustelle der Zukunft.",
+      icon: <Zap size={32} />,
+      color: "blue",
+      stats: { value: "45%", label: "Zeitersparnis" }
+    },
+    {
+      id: 3,
+      title: "Precision Construction",
+      description: "Roboter-assistierte Präzisionsbauweise mit nachhaltigen Materialien und Zero-Waste-Prinzipien.",
+      icon: <Wrench size={32} />,
+      color: "gold",
+      stats: { value: "100%", label: "Qualität" }
+    }
+  ];
 
-    const emailSubject = encodeURIComponent(
-      "Professionelle Zeichnungsdienstleistungen - Anfrage"
-    );
-    const emailBody = encodeURIComponent(
-      `Sehr geehrte Damen und Herren,
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .construction-hub {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        position: relative;
+        overflow: hidden;
+        color: white;
+      }
+      
+      .construction-hub::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+          radial-gradient(circle at 20% 20%, rgba(141, 134, 100, 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(48, 106, 178, 0.15) 0%, transparent 50%);
+        pointer-events: none;
+      }
+      
+      .hero-badge {
+        display: inline-block;
+        padding: 0.8rem 2.5rem;
+        background: linear-gradient(45deg, #8d8664, #306ab2);
+        border-radius: 50px;
+        font-weight: 900;
+        letter-spacing: 3px;
+        margin-bottom: 2rem;
+        animation: pulse-glow 3s ease-in-out infinite;
+        color: white;
+        text-transform: uppercase;
+      }
+      
+      @keyframes pulse-glow {
+        0% { box-shadow: 0 0 20px rgba(141, 134, 100, 0.4); }
+        50% { box-shadow: 0 0 40px rgba(141, 134, 100, 0.8), 0 0 60px rgba(48, 106, 178, 0.4); }
+        100% { box-shadow: 0 0 20px rgba(141, 134, 100, 0.4); }
+      }
+      
+      .hero-title {
+        font-size: clamp(3rem, 8vw, 8rem);
+        font-weight: 900;
+        line-height: 0.9;
+        margin-bottom: 1rem;
+      }
+      
+      .gold-text {
+        color: #8d8664;
+        text-shadow: 0 0 30px rgba(141, 134, 100, 0.8);
+      }
+      
+      .blue-text {
+        color: #306ab2;
+        text-shadow: 0 0 30px rgba(48, 106, 178, 0.8);
+      }
+      
+      .hero-subtitle {
+        font-size: 1.8rem;
+        margin-bottom: 3rem;
+        background: linear-gradient(45deg, #8d8664, #306ab2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 600;
+      }
+      
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem;
+        margin-bottom: 5rem;
+      }
+      
+      .service-card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 2.5rem;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        overflow: hidden;
+      }
+      
+      .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #8d8664, #306ab2);
+        border-radius: 20px 20px 0 0;
+        transform: scaleX(0);
+        transition: transform 0.5s ease;
+      }
+      
+      .service-card:hover {
+        transform: translateY(-15px) scale(1.03);
+        box-shadow: 0 0 40px rgba(141, 134, 100, 0.3), 0 0 80px rgba(48, 106, 178, 0.2);
+        border-color: rgba(141, 134, 100, 0.5);
+      }
+      
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+      
+      .service-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      
+      .service-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .service-icon.gold {
+        background: linear-gradient(135deg, #8d8664, #a09b7a);
+        color: #0a0a0a;
+      }
+      
+      .service-icon.blue {
+        background: linear-gradient(135deg, #306ab2, #4a7bc8);
+        color: white;
+      }
+      
+      .service-card:hover .service-icon {
+        transform: scale(1.2) rotate(360deg);
+      }
+      
+      .service-number {
+        font-size: 3rem;
+        font-weight: 900;
+        opacity: 0.3;
+        color: #8d8664;
+      }
+      
+      .service-title {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: white;
+      }
+      
+      .service-description {
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+      }
+      
+      .build-progress {
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+      
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #8d8664, #306ab2);
+        border-radius: 4px;
+        transition: width 2s ease-in-out;
+        position: relative;
+      }
+      
+      .progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        animation: shimmer 2s ease-in-out infinite;
+      }
+      
+      @keyframes shimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+      
+      .service-stats {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .stat-value {
+        font-weight: 900;
+        font-size: 1.5rem;
+        color: #8d8664;
+      }
+      
+      .stat-label {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+        margin-top: 0.2rem;
+      }
+      
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.8rem 4rem;
+        background: linear-gradient(45deg, #8d8664, #306ab2);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-weight: 900;
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      
+      .cta-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+      }
+      
+      .cta-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(141, 134, 100, 0.4), 0 0 60px rgba(48, 106, 178, 0.3);
+      }
+      
+      .cta-button:hover::before {
+        left: 100%;
+      }
+      
+      .floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      
+      .float-item {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        opacity: 0.1;
+        animation: float 8s ease-in-out infinite;
+      }
+      
+      .float-item:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        background: #8d8664;
+        animation-delay: 0s;
+      }
+      
+      .float-item:nth-child(2) {
+        top: 60%;
+        right: 10%;
+        background: #306ab2;
+        animation-delay: 2s;
+      }
+      
+      .float-item:nth-child(3) {
+        bottom: 20%;
+        left: 20%;
+        background: #8d8664;
+        animation-delay: 4s;
+      }
+      
+      .float-item:nth-child(4) {
+        top: 40%;
+        right: 30%;
+        background: #306ab2;
+        animation-delay: 6s;
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        33% { transform: translateY(-30px) rotate(120deg); }
+        66% { transform: translateY(-15px) rotate(240deg); }
+      }
+      
+      .control-panel {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        display: flex;
+        gap: 1rem;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+      
+      .control-panel.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      
+      .control-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #8d8664, #306ab2);
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      
+      .control-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 30px rgba(141, 134, 100, 0.4);
+      }
+      
+      .control-btn:active {
+        transform: scale(0.95);
+      }
+      
+      @media (max-width: 768px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        
+        .service-card {
+          padding: 2rem;
+        }
+        
+        .hero-title {
+          font-size: clamp(2rem, 8vw, 4rem);
+        }
+        
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+        
+        .cta-button {
+          padding: 1.5rem 3rem;
+          font-size: 1.1rem;
+        }
+        
+        .control-panel {
+          bottom: 1rem;
+          right: 1rem;
+        }
+        
+        .control-btn {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
-ich interessiere mich für Ihre Dienstleistungen im Bereich technische Zeichnungen:
+  // Scroll detection for showing/hiding controls
+  useEffect(() => {
+    const handleScroll = () => {
+      if (servicesRef.current) {
+        const rect = servicesRef.current.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Show controls when services section is in view
+        const isServicesVisible = rect.top < windowHeight && rect.bottom > 0;
+        setShowControls(isServicesVisible);
+      }
+    };
 
-• Präzisions-CAD Konstruktion
-• Architektur & Bauplanung
-• 3D-Visualisierung & Rendering
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
-Gerne möchte ich weitere Details zu Ihren Leistungen und ein unverbindliches Angebot erhalten.
+  // Progress animation
+  useEffect(() => {
+    if (isPlaying) {
+      const interval = setInterval(() => {
+        setProgress(prev => prev.map((p, i) => 
+          p >= 100 ? 0 : p + Math.random() * 15
+        ));
+      }, 200);
+      
+      return () => clearInterval(interval);
+    }
+  }, [isPlaying]);
 
-Mit freundlichen Grüßen`
-    );
+  const handleCTAClick = () => {
+    const emailSubject = encodeURIComponent("Innovative Bauprojekt Anfrage - Digitale Transformation");
+    const emailBody = encodeURIComponent(`Hallo apexnova-Bau Team,
+
+ich interessiere mich für Ihre innovativen Bauleistungen:
+
+🏗️ Smart Bauleitung mit KI-Integration
+⚡ Digital Engineering & VR-Planung  
+🔧 Precision Construction & Robotik
+
+Lassen Sie uns gemeinsam die Zukunft des Bauens gestalten!
+
+Projektdetails:
+- Umfang: [Bitte spezifizieren]
+- Timeline: [Gewünschter Zeitrahm]
+- Innovation Level: [Hoch/Maximal]
+
+Beste Grüße`);
 
     window.location.href = `mailto:info@apexnova-bau.de?subject=${emailSubject}&body=${emailBody}`;
-
-    setTimeout(() => {
-      setIsActivated(false);
-    }, 3000);
   };
 
   return (
-    <div
-      className="min-h-screen py-20 px-4 relative overflow-hidden"
-      style={{ backgroundColor: "#12100f" }} // dunkler Hintergrund (nahe Schwarz)
-    >
-      {/* Gitterhintergrund in #8d8664 transparent */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(#8d8664 1px, transparent 1px),
-            linear-gradient(90deg, #8d8664 1px, transparent 1px)
-          `,
-          backgroundSize: "50px 50px",
-        }}
-      ></div>
+    <div className="construction-hub">
+      {/* Floating Background Elements */}
+      <div className="floating-elements">
+        <div className="float-item"></div>
+        <div className="float-item"></div>
+        <div className="float-item"></div>
+        <div className="float-item"></div>
+      </div>
 
-      <div className="relative max-w-7xl mx-auto text-white">
-        {/* Header */}
-        <header className="text-center mb-20 px-2">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
-            TECHNISCHE
-            <br />
-            ZEICHNUNGEN
-          </h1>
-          <div className="flex justify-center items-center space-x-4 mb-8">
-            <div
-              className="w-24 h-1 rounded"
-              style={{ backgroundColor: "#8d8664" }}
-            ></div>
-            <div
-              className="w-5 h-5 rotate-45 rounded-sm"
-              style={{ backgroundColor: "#306ab2" }}
-            ></div>
-            <div
-              className="w-24 h-1 rounded"
-              style={{ backgroundColor: "#8d8664" }}
-            ></div>
-          </div>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            Wo{" "}
-            <span style={{ color: "#8d8664" }} className="font-semibold">
-              Präzision
-            </span>{" "}
-            auf{" "}
-            <span style={{ color: "#306ab2" }} className="font-semibold">
-              Innovation
-            </span>{" "}
-            trifft
-          </p>
-        </header>
+      {/* Hero Section */}
+      <div className="hero-section" style={{ position: 'relative', zIndex: 10, padding: '5rem 2rem', textAlign: 'center' }}>
+        <div className="hero-badge">
+          🚀 Zukunft des Bauens
+        </div>
+        
+        <h1 className="hero-title">
+          <div className="gold-text">DIGITAL</div>
+          <div className="blue-text">CONSTRUCTION</div>
+          <div style={{ color: 'white' }}>HUB</div>
+        </h1>
+        
+        <p className="hero-subtitle">
+          Wo Innovation auf Präzision trifft - Bauen für die nächste Generation
+        </p>
+      </div>
 
-        {/* Services Grid */}
-        <section className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 px-2">
-          {ServicesData.map((service, idx) => {
-            const isActive = activeCard === service.id;
-            const color = idx % 2 === 0 ? "#8d8664" : "#306ab2";
-
-            return (
-              <article
-                key={service.id}
-                onMouseEnter={() => setActiveCard(service.id)}
-                onMouseLeave={() => setActiveCard(null)}
-                className={`relative rounded-xl border-2 p-8 cursor-pointer transform transition duration-500 ease-in-out
-                  ${
-                    isActive
-                      ? `bg-${color}20 border-[${color}] scale-105 shadow-lg`
-                      : `bg-transparent border-[${color}] hover:bg-${color}10 hover:border-[${color}]`
-                  }
-                `}
-                style={{
-                  borderColor: color,
-                  backgroundColor: isActive ? color + "22" : "transparent",
-                  boxShadow: isActive ? `0 0 12px ${color}` : "none",
-                }}
-                aria-label={service.name}
-              >
-                {/* Top Accent Bar */}
-                <div
-                  className="absolute top-0 left-0 right-0 h-1 rounded-t"
-                  style={{
-                    backgroundColor: isActive ? color : "transparent",
-                    transition: "background-color 0.5s ease",
-                  }}
-                ></div>
-
-                {/* Icon & Code */}
-                <div className="flex justify-between items-center mb-6">
-                  <div
-                    className="text-5xl transition-transform duration-300"
-                    style={{ color: color }}
-                  >
-                    {service.icon}
-                  </div>
-                  <div
-                    className="px-3 py-1 text-xs font-mono rounded-full border transition-colors duration-300 select-none"
-                    style={{
-                      borderColor: color,
-                      color: isActive ? color : "white",
-                    }}
-                  >
-                    {service.code}
-                  </div>
-                </div>
-
-                {/* Visual Box */}
-                <div
-                  className="mb-8 h-32 rounded-lg border border-white/10 flex items-center justify-center relative overflow-hidden"
-                  style={{ backgroundColor: "rgba(0,0,0,0.25)" }}
-                >
-                  <div
-                    className="absolute inset-0 opacity-20"
-                    style={{
-                      backgroundImage: `
-                        linear-gradient(${color} 1px, transparent 1px),
-                        linear-gradient(90deg, ${color} 1px, transparent 1px)
-                      `,
-                      backgroundSize: "20px 20px",
-                    }}
-                  ></div>
-                  <div className="relative z-10 text-center select-none" style={{ color }}>
-                    <div className="text-4xl mb-1">{service.icon}</div>
-                    <div className="text-xs font-mono text-opacity-70">
-                      PROJECT_{service.id.toString().padStart(3, "0")}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Text Content */}
-                <h3
-                  className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-white"
-                  }`}
-                >
-                  {service.name}
-                </h3>
-                <p
-                  className={`text-white/80 leading-relaxed transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-white/80"
-                  }`}
-                >
-                  {service.description}
-                </p>
-
-                {/* Bottom Indicator */}
-                <div
-                  className="absolute bottom-4 left-8 right-8 h-px rounded"
-                  style={{
-                    backgroundColor: isActive ? color : "rgba(255, 255, 255, 0.1)",
-                    boxShadow: isActive ? `0 0 10px ${color}` : "none",
-                    transition: "all 0.5s ease",
-                  }}
-                ></div>
-
-                {/* Service Number */}
-                <div
-                  className="absolute -top-5 -right-5 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg shadow-lg select-none"
-                  style={{
-                    backgroundColor: color,
-                    color: "#000",
-                    boxShadow: "0 0 10px rgba(0,0,0,0.6)",
-                    userSelect: "none",
-                  }}
-                >
-                  {service.id}
-                </div>
-              </article>
-            );
-          })}
-        </section>
-
-        {/* Call to Action */}
-        <div className="text-center mt-24 px-2">
-          <button
-            onClick={handleSystemActivation}
-            className={`relative inline-block px-12 py-4 text-xl font-bold rounded-lg border-2 overflow-hidden transition-transform duration-300 transform
-              ${
-                isActivated
-                  ? "bg-white text-black border-white"
-                  : "bg-transparent text-white border-white hover:bg-gradient-to-r hover:from-[#8d8664] hover:to-[#306ab2] hover:text-black"
-              }
-            `}
+      {/* Services Grid */}
+      <div className="services-grid" ref={servicesRef}>
+        {services.map((service, index) => (
+          <div
+            key={service.id}
+            className="service-card"
+            onMouseEnter={() => setActiveCard(service.id)}
+            onMouseLeave={() => setActiveCard(null)}
             style={{
-              background: isActivated ? "white" : "transparent",
-              borderColor: "white",
+              background: activeCard === service.id 
+                ? 'rgba(255, 255, 255, 0.12)' 
+                : 'rgba(255, 255, 255, 0.08)'
             }}
           >
-            <span className="relative z-10">
-              {isActivated
-                ? "EMAIL WIRD GEÖFFNET..."
-                : "KOSTENLOSES ANGEBOT ERHALTEN"}
-            </span>
-
-            {!isActivated && (
-              <div
-                className="absolute inset-0 opacity-0 hover:opacity-30 transition-opacity duration-300"
-                style={{
-                  background: "linear-gradient(45deg, #8d8664, #306ab2)",
-                  borderRadius: "0.5rem",
-                }}
+            <div className="service-header">
+              <div className={`service-icon ${service.color}`}>
+                {service.icon}
+              </div>
+              <div className="service-number">
+                0{service.id}
+              </div>
+            </div>
+            
+            <h3 className="service-title">{service.title}</h3>
+            <p className="service-description">{service.description}</p>
+            
+            <div className="build-progress">
+              <div 
+                className="progress-bar"
+                style={{ width: `${Math.min(progress[index], 100)}%` }}
               ></div>
-            )}
-          </button>
+            </div>
+            
+            <div className="service-stats">
+              <div>
+                <div className="stat-value">{service.stats.value}</div>
+                <div className="stat-label">{service.stats.label}</div>
+              </div>
+              <div style={{ 
+                color: service.color === 'gold' ? '#8d8664' : '#306ab2',
+                fontSize: '1.2rem',
+                fontWeight: 'bold'
+              }}>
+                {activeCard === service.id ? '● AKTIV' : '○ BEREIT'}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
 
-          <p
-            className={`font-mono text-sm mt-6 transition-colors duration-300 ${
-              isActivated ? "text-white" : "text-gray-400"
-            }`}
-          >
-            {isActivated
-              ? "▶ Öffne Email-Client..."
-              : "▶ Professionell • Schnell • Zuverlässig"}
-          </p>
+      {/* CTA Section */}
+      <div style={{ textAlign: 'center', padding: '0 2rem 5rem' }}>
+        <button 
+          className="cta-button"
+          onClick={handleCTAClick}
+        >
+          <span>Projekt starten</span>
+          <ArrowRight size={24} />
+        </button>
+        
+        <div style={{ 
+          marginTop: '2rem', 
+          color: 'rgba(255, 255, 255, 0.6)',
+          fontSize: '1rem'
+        }}>
+          🎯 Kostenlose Erstberatung • 📊 Digitale Projektanalyse • ⚡ 24h Response
         </div>
+      </div>
+
+      {/* Conditional Control Panel - Only visible when services section is in view */}
+      <div className={`control-panel ${showControls ? 'visible' : ''}`}>
+        <button 
+          className="control-btn"
+          onClick={() => setIsPlaying(!isPlaying)}
+          title={isPlaying ? "Pause Animations" : "Play Animations"}
+        >
+          {isPlaying ? <Pause size={24} /> : <Play size={24} />}
+        </button>
       </div>
     </div>
   );
 };
 
-export default Services;
+export default ConstructionHub;

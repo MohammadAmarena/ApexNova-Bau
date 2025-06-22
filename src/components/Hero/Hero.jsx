@@ -34,7 +34,7 @@ const Hero = () => {
                   data-aos="fade-up"
                   data-aos-once="true"
                   className="hero-title"
-                > Die WebSeite ist noch in Bearbeitung <br/>
+                >
                   Ihre Träume werden zu{" "}
                   <span
                     data-aos="zoom-out"
