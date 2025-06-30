@@ -14,25 +14,99 @@ import {
   ArrowRight
 } from "lucide-react";
 
-import img1 from "../../assets/img1.jpg";
-import img2 from "../../assets/img2.JPG";
-import img3 from "../../assets/img3.JPG";
-import img4 from "../../assets/img4.JPG";
-import img5 from "../../assets/img5.JPG";
-import img6 from "../../assets/img6.JPG";
-import img7 from "../../assets/img7.JPG";
-
+// Korrekte Image-Imports entsprechend den Services
+import trockenbauImg from "../../assets/Trockenbau.JPG";
+import bodenverlegungImg from "../../assets/Bodenverlegung.JPG";
+import fliesenImg from "../../assets/Fliesenlegen.jpg";
+import malerarbeitenImg from "../../assets/Malerarbeiten.JPG";
+import elektroImg from "../../assets/Elektroarbeiten.JPG";
+import sanitaerImg from "../../assets/Sanitärarbeiten.JPG";
+import moebelmontageImg from "../../assets/Möbelmontage.JPG";
+import gartenImg from "../../assets/Garten.JPG";
+import wdvsImg from "../../assets/WDVS.JPG";
+// Für Hausmeisterdienst verwenden wir ein generisches Service-Bild
+const hausmeisterImg = "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80";
 const ServiceData = [
-  { id: 1, name: "Trockenbau", text: "Präzise und effiziente Trockenbaulösungen für moderne Raumgestaltung mit höchster Qualität.", img: img1, icon: Square, category: "Innenausbau" },
-  { id: 2, name: "Bodenverlegung", text: "Hochwertige Bodenverlegung für ein ästhetisches und langlebiges Wohnerlebnis.", img: img2, icon: Square, category: "Bodenbeläge" },
-  { id: 3, name: "Fliesenlegen", text: "Professionelle Fliesenverlegung für Bad, Küche und alle Wohnbereiche mit Perfektion.", img: img3, icon: Square, category: "Fliesen" },
-  { id: 4, name: "Malerarbeiten", text: "Frische Farben für Innen und Außen – verwandeln Sie Ihr Zuhause in ein Kunstwerk.", img: img4, icon: PaintBucket, category: "Malerei" },
-  { id: 5, name: "Elektroarbeiten", text: "Sichere und normgerechte Elektroinstallationen für Ihr Zuhause und Gewerbe.", img: img5, icon: Zap, category: "Elektro" },
-  { id: 6, name: "Sanitärarbeiten", text: "Komplette Sanitärinstallation und -reparatur von Experten ausgeführt.", img: img6, icon: Wrench, category: "Sanitär" },
-  { id: 7, name: "Hausmeisterdienst", text: "Zuverlässige Instandhaltung und Pflege für Ihr Eigentum mit Full-Service.", img: img7, icon: Home, category: "Service" },
-  { id: 8, name: "Möbelmontage", text: "Sorgfältige und schnelle Montage Ihrer Möbel – vom Einzelstück bis zur Kompletteinrichtung.", img: img1, icon: Hammer, category: "Montage" },
-  { id: 9, name: "Garten- & Landschaftsbau", text: "Gestalten Sie mit uns grüne Oasen und traumhafte Außenanlagen nach Ihren Wünschen.", img: img2, icon: TreePine, category: "Außenanlagen" },
-  { id: 10, name: "WDVS & Fassadenschutz", text: "Effiziente Wärmedämmung und moderne Fassadengestaltung für optimalen Gebäudeschutz.", img: img3, icon: Shield, category: "Fassade" }
+  { 
+    id: 1, 
+    name: "Trockenbau", 
+    text: "Präzise und effiziente Trockenbaulösungen für moderne Raumgestaltung mit höchster Qualität.", 
+    img: trockenbauImg, 
+    icon: Square, 
+    category: "Innenausbau" 
+  },
+  { 
+    id: 2, 
+    name: "Bodenverlegung", 
+    text: "Hochwertige Bodenverlegung für ein ästhetisches und langlebiges Wohnerlebnis.", 
+    img: bodenverlegungImg, 
+    icon: Square, 
+    category: "Bodenbeläge" 
+  },
+  { 
+    id: 4, 
+    name: "Malerarbeiten", 
+    text: "Frische Farben für Innen und Außen – verwandeln Sie Ihr Zuhause in ein Kunstwerk.", 
+    img: malerarbeitenImg, 
+    icon: PaintBucket, 
+    category: "Malerei" 
+  },
+  { 
+    id: 3, 
+    name: "Fliesenlegen", 
+    text: "Professionelle Fliesenverlegung für Bad, Küche und alle Wohnbereiche mit Perfektion.", 
+    img: fliesenImg, 
+    icon: Square, 
+    category: "Fliesen" 
+  },
+  { 
+    id: 5, 
+    name: "Elektroarbeiten", 
+    text: "Sichere und normgerechte Elektroinstallationen für Ihr Zuhause und Gewerbe.", 
+    img: elektroImg, 
+    icon: Zap, 
+    category: "Elektro" 
+  },
+  { 
+    id: 6, 
+    name: "Sanitärarbeiten", 
+    text: "Komplette Sanitärinstallation und -reparatur von Experten ausgeführt.", 
+    img: sanitaerImg, 
+    icon: Wrench, 
+    category: "Sanitär" 
+  },
+  { 
+    id: 7, 
+    name: "Hausmeisterdienst", 
+    text: "Zuverlässige Instandhaltung und Pflege für Ihr Eigentum mit Full-Service.", 
+    img: hausmeisterImg, 
+    icon: Home, 
+    category: "Service" 
+  },
+  { 
+    id: 8, 
+    name: "Möbelmontage", 
+    text: "Sorgfältige und schnelle Montage Ihrer Möbel – vom Einzelstück bis zur Kompletteinrichtung.", 
+    img: moebelmontageImg, 
+    icon: Hammer, 
+    category: "Montage" 
+  },
+  { 
+    id: 9, 
+    name: "Garten- & Landschaftsbau", 
+    text: "Gestalten Sie mit uns grüne Oasen und traumhafte Außenanlagen nach Ihren Wünschen.", 
+    img: gartenImg, 
+    icon: TreePine, 
+    category: "Außenanlagen" 
+  },
+  { 
+    id: 10, 
+    name: "WDVS & Fassadenschutz", 
+    text: "Effiziente Wärmedämmung und moderne Fassadengestaltung für optimalen Gebäudeschutz.", 
+    img: wdvsImg, 
+    icon: Shield, 
+    category: "Fassade" 
+  }
 ];
 
 const OurServices = () => {
