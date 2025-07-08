@@ -106,7 +106,6 @@ const SuperGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [orderedImages, setOrderedImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [time, setTime] = useState(0);
 
   const images = [
@@ -138,7 +137,6 @@ const SuperGallery = () => {
 
   useEffect(() => {
     shuffleImages();
-    setTimeout(() => setIsLoading(false), 1200); // Längere Ladezeit für mehr Bilder
   }, [shuffleImages]);
 
   useEffect(() => {
@@ -164,18 +162,6 @@ const SuperGallery = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage, orderedImages]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-[#1c1c1c] flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-[#8d8664] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold text-white mb-2">100 Bilder werden geladen...</h2>
-          <p className="text-[#8d8664]">Deine visuelle Erfahrung wird vorbereitet</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#1c1c1c] relative overflow-hidden">
