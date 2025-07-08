@@ -88,6 +88,7 @@ import img84 from "../../assets/img84.JPG";
 import img85 from "../../assets/img85.JPG";
 import img86 from "../../assets/img86.JPG";
 import img87 from "../../assets/img87.JPG";
+import img88 from "../../assets/img88.JPG";
 import img89 from "../../assets/img89.JPG";
 import img90 from "../../assets/img90.JPG";
 import img91 from "../../assets/img91.JPG";
@@ -117,7 +118,7 @@ const SuperGallery = () => {
     img51, img52, img53, img54, img55, img56, img57, img58, img59, img60,
     img61, img62, img63, img64, img65, img66, img67, img68, img69, img70,
     img71, img72, img73, img74, img75, img76, img77, img78, img79, img80,
-    img81, img82, img83, img84, img85, img86, img87, img89, img90,
+    img81, img82, img83, img84, img85, img86, img87, img88, img89, img90,
     img91, img92, img93, img94, img95, img96, img97, img98, img99, img100
   ];
 
