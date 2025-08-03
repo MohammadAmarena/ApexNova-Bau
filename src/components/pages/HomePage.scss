@@ -1,0 +1,15 @@
+// src/pages/HomePage.scss
+
+@use '../styles/variables' as *;
+
+.homepage {
+  background: $gradient-primary;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.2s ease;
+
+  &.dark {
+    background: $dark-bg;
+    color: $dark-text;
+  }
+}
