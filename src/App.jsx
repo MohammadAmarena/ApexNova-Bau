@@ -8,7 +8,9 @@ import Banner from "./components/Banner/Banner.jsx";
 import GetInTouch from "./components/GetInTouch/GetInTouch.jsx";
 import Expertise from "./components/Expertise/Expertise.jsx";
 import Footer from "./components/Footer/Footer.jsx";
-import GalleryPage from "./components/Gallery/GalleryPage.jsx"; 
+import GalleryPage from "./components/Gallery/GalleryPage.jsx";
+import Impressum from "./components/pages/Impressum";
+import Datenschutzerklaerung from "./components/pages/Datenschutzerklaerung";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -19,11 +21,26 @@ const HomePage = () => {
       <Services />
       <GetInTouch />
       <Expertise />
-      <Banner /><br />
+      <Banner />
+      <br />
       <Footer />
     </div>
   );
 };
+
+const GalleryLayout = () => (
+  <div className="min-h-screen flex flex-col bg-white text-gray-900">
+    <GalleryPage />
+    <Footer />
+  </div>
+);
+
+const LegalPageLayout = ({ children }) => (
+  <div className="min-h-screen flex flex-col bg-white text-gray-900">
+    <main className="flex-grow">{children}</main>
+    <Footer />
+  </div>
+);
 
 const App = () => {
   React.useEffect(() => {
@@ -41,7 +58,23 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/gallery" element={<GalleryLayout />} />
+        <Route
+          path="/impressum"
+          element={
+            <LegalPageLayout>
+              <Impressum />
+            </LegalPageLayout>
+          }
+        />
+        <Route
+          path="/datenschutz"
+          element={
+            <LegalPageLayout>
+              <Datenschutzerklaerung />
+            </LegalPageLayout>
+          }
+        />
       </Routes>
     </Router>
   );
